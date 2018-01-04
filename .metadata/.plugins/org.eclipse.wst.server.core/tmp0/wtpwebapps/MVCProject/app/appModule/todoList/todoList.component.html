@@ -1,0 +1,65 @@
+<div class="container">
+<h1 ng-show="!vm.selected">Todo List</h1>
+<h4 ng-show="!vm.selected">Things to do : {{vm.getNumOfItems()}}</h4>
+<form ng-show="!vm.selected">
+     <input class="form-group" type="text" name="" value="" placeholder="task" ng-model="task.task">
+     <input type="submit" name="" value="Add Task" ng-click="vm.addTask(task); task = {}">
+</form>
+<div class="" ng-show="vm.selected && !vm.editTodo">
+     <h3>{{vm.selected.task}}</h3>
+     id: {{vm.selected.id}}
+     <br>
+     {{vm.selected.description}}
+     <br>
+     Completed: {{vm.selected.completed}}
+     <br>
+     <button type="button" name="button" ng-click="vm.setEditTodo()">Edit</button>
+     <button type="button" name="button" ng-click="vm.displayTable()">Go Back</button>
+</div>
+<div class="" ng-show="vm.editTodo && vm.selected">
+     <form>
+          <input class="form-group" type="text" name="" value="" placeholder="Task" ng-model="vm.editTodo.task">
+          <input class="form-group" type="text" name="" value="" placeholder="Description" ng-model="vm.editTodo.description">
+          <br>
+          Completed: <input class="form-group" type="checkbox" name="" value="" ng-model="vm.editTodo.completed">
+          <br>
+          <input type="submit" name="" value="Cancel" ng-click="vm.resetEditTodo()">
+          <input type="submit" name="" value="Save" ng-click="vm.updateTodo(vm.editTodo)">
+     </form>
+</div>
+<table ng-show="!vm.selected">
+     <th>
+          <div class="center-text left-right-margins">
+               Task
+          </div>
+     </th>
+     <th>
+          <div class="center-text left-right-margins">
+               Mark
+          </div>
+     </th>
+     <th>
+          <div class="center-text left-right-margins">
+               Completed
+          </div>
+     </th>
+     <tr ng-repeat="task in vm.todos">
+          <td>
+               <div class="left-right-margins" ng-click="vm.displayTodo(task)">
+                    {{task.task}}
+               </div>
+          </td>
+          <td>
+               <form class="container justify-content-center left-right-margins">
+                    <input class="form-group" type="checkbox" name="" value="" ng-model="task.completed">
+               </form>
+          </td>
+          <td class="center-text left-right-margins">{{task.completed}}</td>
+          <td><button type="button" name="button" ng-click="vm.deleteTodo(task.id)">Delete</button></td>
+     </tr>
+</table>
+<br>
+</div>
+<div class="container" ng-show="!vm.selected">
+     <button id="badButton" class="form-group" type="button" name="button" ng-click="vm.doSomethingFun()">Don't press this button.</button>
+</div>
